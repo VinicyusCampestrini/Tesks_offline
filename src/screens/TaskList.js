@@ -11,7 +11,7 @@ export default class TaskList extends Component {
         const today = moment().locale('pt-br').format('ddd, D [de] MMMM')
         return (
             <View style={styles.conteiner}>
-                <ImageBackground source={todayImage} 
+                <ImageBackground source={todayImage}
                     style={styles.background}>
                     <View style={styles.titleBar}>
                         <Text style={styles.title}>Hoje</Text>
@@ -61,3 +61,5 @@ const styles = StyleSheet.create({
     },
 
 })
+
+//git
