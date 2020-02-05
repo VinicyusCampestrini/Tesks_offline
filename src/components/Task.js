@@ -47,11 +47,11 @@ function getCheckView(doneAt) {
 
 const styles = StyleSheet.create({
   container: {
-      flexDirection: 'row',
-      borderColor: '#AAA',
-      borderBottomWidth: 1,
-      alignItems: 'center',
-      paddingVertical: 10
+    flexDirection: 'row',
+    borderColor: '#AAA',
+    borderBottomWidth: 1,
+    alignItems: 'center',
+    paddingVertical: 10
   },
   checkContainer: {
     width: '20%',
