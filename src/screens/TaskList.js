@@ -72,7 +72,7 @@ export default class TaskList extends Component {
                             <Icon name={this.state.showDoneTasks ? 'eye' : 'eye-slash'}
                                 size={20} color={commonStyles.colors.secondary}/>
                         </TouchableOpacity>
-                    </View>    
+                    </View>
                     <View style={styles.titleBar}>
                         <Text style={styles.title}>Hoje</Text>
                         <Text style={styles.subtitle}>{today}</Text>
@@ -125,3 +125,4 @@ const styles = StyleSheet.create({
     }
 
 })
+//git
