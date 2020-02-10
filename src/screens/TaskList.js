@@ -12,7 +12,7 @@ export default class TaskList extends Component {
 
     state = {
         showDoneTasks: true,
-        showAddTask: true,
+        showAddTask: false,
         visibleTasks: [],
         tasks: [{
             id: Math.random(),
