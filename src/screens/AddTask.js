@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Modal, View, Text, TouchableOpacity, TextInput, StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import { Modal, View, Text, TouchableOpacity, TextInput, StyleSheet, TouchableWithoutFeedback, Platform, TouchableNativeFeedbackBase } from 'react-native'
 import commonStyles from '../commonStyles'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import moment from 'moment'
 
 const initialState = {
-    desc:'', date: new Date()
+    desc:'', date: new Date(), showDatePicker: false
 }
 
 export default class AddTask extends Component {
@@ -13,13 +14,28 @@ export default class AddTask extends Component {
         ...initialState
     }
 
-    getDateTimePicker = () => {
-        return <DateTimePicker 
-            value={this.state.date}
-            onChange={(_, date) => this.setState({ date })}
+    getDatePicker = () => {
+        let datePicker = <DateTimePicker value={this.state.date}
+            onChange={(_, date) => this.setState({date, showDatePicker: false})}
             mode='date' />
-    }
+        
+        const dateString = moment(this.state.date).format('dddd, D [de] MMMM [de] YYYY')
 
+        if(Platform.OS === 'android') {
+            datePicker = (
+                <View>
+                    <TouchableOpacity onPress={() => this.setState({ showDatePicker: true })}>
+                        <Text style={styles.date}>
+                            {dateString}
+                        </Text>
+                    </TouchableOpacity>
+                    {this.state.showDatePicker && datePicker}
+                </View>
+            )
+        }
+        
+        return datePicker
+    }
 
     render() {
         return(
@@ -33,13 +49,13 @@ export default class AddTask extends Component {
                 </TouchableWithoutFeedback>
 
                 <View style={styles.conteiner}>
-                    <Text style={styles.header}> Nova Tarefa</Text>
+                    <Text style={styles.header}> Adicionar Uma Nova Tarefa</Text>
 
                     <TextInput style={styles.input}
-                        placeholder="informe A Descrição :)"
+                        placeholder="Descreva sua nova tarefa"
                         onChangeText={desc => this.setState({desc})}
                         value={this.state.desc}/>
-                    {this.getDateTimePicker()}
+                    {this.getDatePicker()}
                     <View style={styles.buttons}>
                         <TouchableOpacity onPress={this.props.onCancel} >
                             <Text style={styles.button}>Cancelar</Text>
@@ -93,11 +109,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         borderWidth: 1,
         borderColor: '#E3E3E3',
-        borderRadius: 6
+        borderRadius: 6,
+        textAlign: 'center',
     },
     button: {
         margin: 20,
         marginRight: 30,
         color: commonStyles.colors.today,
     },
+    date: {
+        fontFamily: commonStyles.fontFamily,
+        fontSize: 20,
+        textAlign: 'center',
+
+    }
 })
