@@ -60,7 +60,8 @@ export default class TaskList extends Component {
 
     addTask = newTask => {
         if(!newTask.desc || !newTask.desc.trim()) {
-            Alert.alert('DadosInvalidos', 'Descrição não informada')
+            Alert.alert('   Você não preencheu a descrição',  
+                        '           Por favor preench a descição')
             return 
         }
 
